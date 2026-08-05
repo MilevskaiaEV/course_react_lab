@@ -8,12 +8,13 @@
 
 */
 
-import Gallery, { Profile } from "./Gallery";
-
+import { Profile } from "./Profile";
+import { Gallery } from "./Gallery";
 export default function App() {
   return (
     <div>
-      <Profile />      
+      <Profile />
+      <Gallery />     
     </div>
   );
 }
