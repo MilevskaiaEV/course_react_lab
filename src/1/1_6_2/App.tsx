@@ -13,6 +13,9 @@ function Item({ name, importance }: { name: string, importance: number }) {
   return (
     <li className="item">
       {name}
+      {importance>0 && ' '}
+      {importance>0 && <i>(importance: {importance})</i>
+}
     </li>
   );
 }
