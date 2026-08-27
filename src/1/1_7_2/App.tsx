@@ -9,6 +9,14 @@ export default function RecipeList() {
     return (
         <div>
             <h1>Recipes</h1>
+             {recipes.map(r => (
+        <article key={r.id}>
+          <h2>{r.name}</h2>
+          <ul>
+            {r.ingredients.map(i => <li key={i}>{i}</li>)}
+          </ul>
+        </article>
+      ))}
         </div>
     );
 }
