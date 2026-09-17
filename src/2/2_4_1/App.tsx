@@ -13,13 +13,14 @@ export default function TrafficLight() {
     const [walk, setWalk] = useState(true);
 
     function handleClick() {
+        alert(walk ? 'Stop is next' : 'Walk is next');
         setWalk(!walk)
     }
 
     return (
         <>
             <button onClick={handleClick}>
-                Change to {walk ? 'Stop' : 'Walk'}
+                Change to {walk ? 'Следующая остановка' : 'Следующим будет идти'}
             </button>
             <h1
                 style={{
