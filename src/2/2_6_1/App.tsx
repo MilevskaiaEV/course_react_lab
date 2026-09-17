@@ -15,10 +15,13 @@ export default function Scoreboard() {
     });
 
     function handlePlusClick() {
-        player.score++;
-    }
+        setPlayer({
+        ...player,
+        score: player.score+1
+    });
+}
 
-    function handleFirstNameChange(e: any) {
+    function handleFirstNameChange(e: any) {F:\73IP\Milevskaia\course_react_lab\src\2\2_6_1\App.tsx
         setPlayer({
             ...player,
             firstName: e.target.value,
@@ -27,8 +30,9 @@ export default function Scoreboard() {
 
     function handleLastNameChange(e: any) {
         setPlayer({
+            ...player,
             lastName: e.target.value,
-        } as any);
+        });
     }
 
     return (
