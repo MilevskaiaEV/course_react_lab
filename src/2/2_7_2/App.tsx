@@ -24,22 +24,27 @@ const initialProducts = [
 ];
 
 export default function ShoppingCart() {
-    const [products, setProducts] = useState(
-        initialProducts
-    );
+    const [products, setProducts] = useState(initialProducts);
 
     function handleIncreaseClick(productId: number) {
-        setProducts(
-            products.map((product) => {
-                if (product.id === productId) {
-                    return {
-                        ...product,
-                        count: product.count + 1,
-                    };
-                } else {
-                    return product;
-                }
-            })
+        setProducts((prevProducts) =>
+            prevProducts.map((product) =>
+                product.id === productId
+                    ? { ...product, count: product.count + 1 }
+                    : product
+            )
+        );
+    }
+
+    function handleDecreaseClick(productId: number) {
+        setProducts((prevProducts) =>
+            prevProducts
+                .map((product) => {
+                    if (product.id !== productId) return product;
+                    if (product.count === 1) return null;
+                    return { ...product, count: product.count - 1 };
+                })
+                .filter((product): product is typeof initialProducts[number] => product !== null)
         );
     }
 
@@ -55,7 +60,13 @@ export default function ShoppingCart() {
                     >
                         +
                     </button>
-                    <button>–</button>
+                    <button
+                        onClick={() => {
+                            handleDecreaseClick(product.id);
+                        }}
+                    >
+                        –
+                    </button>
                 </li>
             ))}
         </ul>
