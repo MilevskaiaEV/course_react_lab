@@ -28,8 +28,13 @@ export default function ShoppingCart() {
         initialProducts
     );
 
-    function handleIncreaseClick(productId: number) { }
-
+    function handleIncreaseClick(productId: number) {
+setProducts((prevProducts) => 
+    prevProducts.map((product) =>
+    product.id === productId ? {...product, count: product.count + 1}:product
+)
+);
+}
     return (
         <ul>
             {products.map((product) => (
@@ -45,5 +50,4 @@ export default function ShoppingCart() {
                 </li>
             ))}
         </ul>
-    );
-}
+    );}
