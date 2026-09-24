@@ -24,26 +24,20 @@ export default function TaskApp() {
     const [todos, setTodos] = useState(initialTodos);
 
     function handleAddTodo(title: string) {
-        todos.push({
-            id: nextId++,
-            title: title,
-            done: false,
-        });
+        setTodos((prev) => [
+            ...prev,
+            {
+            id: nextId++,title, done: false},
+        ]);
     }
 
     function handleChangeTodo(nextTodo: Todo) {
-        const todo = todos.find(
-            (t) => t.id === nextTodo.id
-        )!!;
-        todo.title = nextTodo.title;
-        todo.done = nextTodo.done;
+        setTodos((prev) => 
+            prev.map((todo) => (todo.id === nextTodo.id?nextTodo:todo)));
     }
 
     function handleDeleteTodo(todoId: number) {
-        const index = todos.findIndex(
-            (t) => t.id === todoId
-        );
-        todos.splice(index, 1);
+        setTodos((prev) => prev.filter((todo) => todo.id !==todoId));
     }
 
     return (
