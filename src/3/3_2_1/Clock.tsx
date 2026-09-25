@@ -1,10 +1,7 @@
-import { useState } from 'react';
-
-export default function Clock(props: { time: string, color: string }) {
-  const [color, setColor] = useState(props.color);
+export default function Clock({ color, time }: { color: string; time: string }) {
   return (
     <h1 style={{ color: color }}>
-      {props.time}
+      {time}
     </h1>
   );
 }
