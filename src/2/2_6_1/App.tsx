@@ -21,7 +21,7 @@ export default function Scoreboard() {
     });
 }
 
-    function handleFirstNameChange(e: any) {F:\73IP\Milevskaia\course_react_lab\src\2\2_6_1\App.tsx
+    function handleFirstNameChange(e: any) {
         setPlayer({
             ...player,
             firstName: e.target.value,

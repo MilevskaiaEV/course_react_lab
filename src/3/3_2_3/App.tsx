@@ -5,18 +5,16 @@
     Этот код работает, но есть небольшой сбой в пользовательском интерфейсе. Когда вы нажимаете "Star" или "Unstar", подсветка на мгновение исчезает. Однако она снова появляется, как только вы перемещаете указатель или переключаетесь на другое письмо с клавиатуры. Почему это происходит? Исправьте это, чтобы подсветка не исчезала после нажатия кнопки.
 */
 
-
 import { useState } from 'react';
 import { initialLetters, LetterType } from './data.js';
 import Letter from './Letter.js';
 
 export default function MailClient() {
     const [letters, setLetters] = useState(initialLetters);
-    const [highlightedLetter, setHighlightedLetter] =
-        useState<LetterType | null>(null);
+    const [highlightedLetterId, setHighlightedLetterId] = useState<number | null>(null);
 
     function handleHover(letter: LetterType) {
-        setHighlightedLetter(letter);
+        setHighlightedLetterId(letter.id);
     }
 
     function handleStar(starred: LetterType) {
@@ -41,7 +39,7 @@ export default function MailClient() {
                         key={letter.id}
                         letter={letter}
                         isHighlighted={
-                            letter === highlightedLetter
+                            letter.id === highlightedLetterId
                         }
                         onHover={handleHover}
                         onToggleStar={handleStar}
@@ -51,4 +49,3 @@ export default function MailClient() {
         </>
     );
 }
-
