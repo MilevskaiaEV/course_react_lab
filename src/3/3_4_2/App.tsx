@@ -9,48 +9,76 @@ import { useState } from 'react';
 
 export default function App() {
   const [reverse, setReverse] = useState(false);
-  let checkbox = (
-    <label>
-      <input
-        type="checkbox"
-        checked={reverse}
-        onChange={e => setReverse(e.target.checked)}
-      />
-      Reverse order
-    </label>
-  );
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+
   if (reverse) {
     return (
       <>
-        <Field label="Last name" /> 
-        <Field label="First name" />
-        {checkbox}
+        <Field
+          label="Last name"
+          value={lastName}
+          onChange={setLastName}
+        />
+        <Field
+          label="First name"
+          value={firstName}
+          onChange={setFirstName}
+        />
+        <label>
+          <input
+            type="checkbox"
+            checked={reverse}
+            onChange={e => setReverse(e.target.checked)}
+          />
+          Reverse order
+        </label>
       </>
     );
   } else {
     return (
       <>
-        <Field label="First name" /> 
-        <Field label="Last name" />
-        {checkbox}
+        <Field
+          label="First name"
+          value={firstName}
+          onChange={setFirstName}
+        />
+        <Field
+          label="Last name"
+          value={lastName}
+          onChange={setLastName}
+        />
+        <label>
+          <input
+            type="checkbox"
+            checked={reverse}
+            onChange={e => setReverse(e.target.checked)}
+          />
+          Reverse order
+        </label>
       </>
-    );    
+    );
   }
 }
 
-function Field({ label }: { label: string }) {
-  const [text, setText] = useState('');
+function Field({
+  label,
+  value,
+  onChange
+}: {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+}) {
   return (
     <label>
       {label}:{' '}
       <input
         type="text"
-        value={text}
+        value={value}
         placeholder={label}
-        onChange={e => setText(e.target.value)}
+        onChange={e => onChange(e.target.value)}
       />
     </label>
   );
 }
-
-
