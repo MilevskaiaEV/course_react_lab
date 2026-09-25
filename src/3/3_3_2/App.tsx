@@ -11,36 +11,35 @@ import { useState } from 'react';
 import { foods, filterItems, Item } from './data';
 
 export default function FilterableList() {
-  return (
-    <>
-      <SearchBar />
-      <hr />
-      <List items={foods} />
-    </>
-  );
-}
-
-function SearchBar() {
   const [query, setQuery] = useState('');
 
-  function handleChange(e: any) {
-    setQuery(e.target.value);
-  }
+  // Используем filterItems из data.ts
+  const filteredItems = filterItems(foods, query);
 
   return (
-    <label>
-      Search:{' '}
-      <input
-        value={query}
-        onChange={handleChange}
-      />
-    </label>
+    <>
+      <label>
+        Search:{' '}
+        <input
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        />
+      </label>
+      <hr />
+      <List items={filteredItems} />
+    </>
   );
 }
 
 function List({ items }: { items: Item[] }) {
   return (
     <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+        </tr>
+      </thead>
       <tbody>
         {items.map(food => (
           <tr key={food.id}>
