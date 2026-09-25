@@ -5,20 +5,26 @@
     Измените структуру состояния для поддержки множественного выбора (Как бы вы его структурировали? Подумайте об этом перед написанием кода). Каждый флажок должен стать независимым от других. Щелчок по выбранному письму должен снимать флажок. Наконец, нижний колонтитул должен показывать правильное количество выбранных элементов.
 */
 
-
 import { useState } from 'react';
 import { letters } from './data.js';
 import Letter from './Letter.js';
 
 export default function MailClient() {
-  const [selectedId, setSelectedId] = useState<number | null>(null);
+  // Используем Set для хранения выбранных ID
+  const [selectedIds, setSelectedIds] = useState<Set<number>>(new Set());
 
-  // TODO: allow multiple selection
-  const selectedCount = 1;
+  const selectedCount = selectedIds.size;
 
   function handleToggle(toggledId: number) {
-    // TODO: allow multiple selection
-    setSelectedId(toggledId);
+    setSelectedIds(prevSelectedIds => {
+      const newSelectedIds = new Set(prevSelectedIds);
+      if (newSelectedIds.has(toggledId)) {
+        newSelectedIds.delete(toggledId);
+      } else {
+        newSelectedIds.add(toggledId);
+      }
+      return newSelectedIds;
+    });
   }
 
   return (
@@ -29,10 +35,7 @@ export default function MailClient() {
           <Letter
             key={letter.id}
             letter={letter}
-            isSelected={
-              // TODO: allow multiple selection
-              letter.id === selectedId
-            }
+            isSelected={selectedIds.has(letter.id)}
             onToggle={handleToggle}
           />
         ))}
@@ -46,4 +49,3 @@ export default function MailClient() {
     </>
   );
 }
-
