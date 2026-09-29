@@ -20,6 +20,10 @@ export default function Chat(
         onChange={(e) => {
           // TODO: dispatch edited_message
           // (Read the input value from e.target.value)
+          dispatch({
+            type: 'edited_message',
+            message: e.target.value
+          });
         }}
       />
       <br />
