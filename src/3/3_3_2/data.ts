@@ -34,4 +34,3 @@ export function filterItems(items: Item[], query: string) {
     name: 'Dim sum',
     description: 'Dim sum is a large range of small dishes that Cantonese people traditionally enjoy in restaurants for breakfast and lunch'
   }];
-  
