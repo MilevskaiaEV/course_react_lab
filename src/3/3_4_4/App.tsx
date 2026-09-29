@@ -4,7 +4,6 @@
 */
 
 import { useState } from 'react';
-
 export default function Gallery() {
   const [index, setIndex] = useState(0);
   const hasNext = index < images.length - 1;
