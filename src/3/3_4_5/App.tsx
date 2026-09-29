@@ -21,19 +21,16 @@ export default function ContactList() {
       <label>
         <input
           type="checkbox"
-          //value={reverse}
-          onChange={e => {
-            setReverse(e.target.checked)
-          }}
+          onChange={e => setReverse(e.target.checked)}
         />{' '}
         Show in reverse order
       </label>
       <ul>
-        {displayedContacts.map((contact, i) =>
-          <li key={i}>
+        {displayedContacts.map((contact) => (
+          <li key={contact.id}>  {/* ← используем contact.id вместо индекса */}
             <Contact contact={contact} />
           </li>
-        )}
+        ))}
       </ul>
     </>
   );
