@@ -1,6 +1,6 @@
 export type State = {
     selectedId: number;
-    message: string;
+    messages: Record<number, string>;
 };
 
 export type Action = {
@@ -15,7 +15,7 @@ export type Action = {
 
 export const initialState = {
     selectedId: 0,
-    message: 'Hello',
+    messages: {} as Record<number, string>,
 };
 
 export function messengerReducer(
@@ -27,21 +27,26 @@ export function messengerReducer(
             return {
                 ...state,
                 selectedId: action.contactId,
-                message: '',
             };
         }
         case 'edited_message': {
             return {
                 ...state,
-                message: action.message,
+                messages: {
+                    ...state.messages,
+                    [state.selectedId]: action.message,
+                },
             };
         }
         case 'sent_message': {
             return {
-              ...state,
-              message: '',
+                ...state,
+                messages: {
+                    ...state.messages,
+                    [state.selectedId]: '',
+                },
             };
-          }        
+        }        
         default: {
             throw Error('Unknown action: ' + action.type);
         }

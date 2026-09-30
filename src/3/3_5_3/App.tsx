@@ -13,8 +13,9 @@ import { initialState, messengerReducer } from './messengerReducer';
 
 export default function Messenger() {
   const [state, dispatch] = useReducer(messengerReducer, initialState);
-  const message = state.message;
+  const message = state.messages[state.selectedId] ?? '';
   const contact = contacts.find((c) => c.id === state.selectedId)!!;
+
   return (
     <div>
       <ContactList
@@ -36,10 +37,10 @@ export type Contact = {
   id: number;
   name: string;
   email: string;
-}
+};
 
 const contacts = [
-  {id: 0, name: 'Taylor', email: 'taylor@mail.com'},
-  {id: 1, name: 'Alice', email: 'alice@mail.com'},
-  {id: 2, name: 'Bob', email: 'bob@mail.com'},
+  { id: 0, name: 'Taylor', email: 'taylor@mail.com' },
+  { id: 1, name: 'Alice', email: 'alice@mail.com' },
+  { id: 2, name: 'Bob', email: 'bob@mail.com' },
 ];
