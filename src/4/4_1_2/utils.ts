@@ -7,4 +7,3 @@ export function getImageUrl(place: PlaceType) {
       'l.jpg'
     );
   }
-  
