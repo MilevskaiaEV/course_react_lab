@@ -6,5 +6,3 @@ export async function fetchBio(person: string): Promise<string> {
       }, delay);
     })
   }
-  
-  
