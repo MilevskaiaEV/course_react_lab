@@ -10,13 +10,16 @@
 import { useState } from 'react';
 import MyInput from './MyInput.tsx';
 
-export default function Form() {
+export default function Form() {  // ← экспорт по умолчанию
   const [show, setShow] = useState(false);
   const [name, setName] = useState('Taylor');
   const [upper, setUpper] = useState(false);
+
   return (
     <>
-      <button onClick={() => setShow(s => !s)}>{show ? 'Hide' : 'Show'} form</button>
+      <button onClick={() => setShow(s => !s)}>
+        {show ? 'Hide' : 'Show'} form
+      </button>
       <br />
       <hr />
       {show && (
