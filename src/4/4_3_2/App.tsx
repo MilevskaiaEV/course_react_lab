@@ -7,41 +7,29 @@
   Допустим, вы хотите сфокусировать первое поле. Первый компонент MyInput теперь получает булево свойство shouldFocus, установленное в true. Измените логику так, чтобы focus() вызывалась только в том случае, если пропс shouldFocus, полученный MyInput, равен true.
 */
 
-import { useState } from 'react';
-import MyInput from './MyInput.tsx';
+import { useEffect, useRef } from 'react';
 
-export default function Form() {
-  const [show, setShow] = useState(false);
-  const [firstName, setFirstName] = useState('Taylor');
-  const [lastName, setLastName] = useState('Swift');
-  const [upper, setUpper] = useState(false);
-  const name = firstName + ' ' + lastName;
+interface MyInputProps {
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  shouldFocus?: boolean;
+}
+
+export default function MyInput({ value, onChange, shouldFocus }: MyInputProps) {
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    if (shouldFocus) {
+      inputRef.current?.focus();
+    }
+  }, [shouldFocus]);
+
   return (
-    <>
-      <button onClick={() => setShow(s => !s)}>{show ? 'Hide' : 'Show'} form</button>
-      <br />
-      <hr />
-      {show && (
-        <>
-          <label>
-            Enter your first name:
-            <MyInput
-              value={firstName}
-              onChange={e => setFirstName(e.target.value)}
-              shouldFocus={true}
-            />
-          </label>
-          <label>
-            Enter your last name:
-            <MyInput
-              value={lastName}
-              onChange={e => setLastName(e.target.value)}
-              shouldFocus={false}
-            />
-          </label>
-          <p>Hello, <b>{upper ? name.toUpperCase() : name}</b></p>
-        </>
-      )}
-    </>
+    <input
+      ref={inputRef}
+      type="text"
+      value={value}
+      onChange={onChange}
+    />
   );
 }
