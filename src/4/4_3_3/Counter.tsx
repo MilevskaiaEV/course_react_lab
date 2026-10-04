@@ -1,15 +1,20 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 export default function Counter() {
   const [count, setCount] = useState(0);
+  const intervalRef = useRef<number | null>(null);
 
   useEffect(() => {
-    function onTick() {
-      setCount(c => c + 1);
-    }
+    intervalRef.current = window.setInterval(() => {
+      setCount(prev => prev + 1);
+    }, 1000);
 
-    setInterval(onTick, 1000);
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+    };
   }, []);
-
   return <h1>{count}</h1>;
 }
