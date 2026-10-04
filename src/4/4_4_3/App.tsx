@@ -9,18 +9,16 @@ import { useState } from 'react';
 import ContactList from './ContactList';
 import EditContact from './EditContact';
 
+export type ContactType = {
+  id: number;
+  name: string;
+  email: string;
+}
+
 export default function ContactManager() {
-  const [
-    contacts,
-    setContacts
-  ] = useState(initialContacts);
-  const [
-    selectedId,
-    setSelectedId
-  ] = useState(0);
-  const selectedContact = contacts.find(c =>
-    c.id === selectedId
-  );
+  const [contacts, setContacts] = useState(initialContacts);
+  const [selectedId, setSelectedId] = useState(0);
+  const selectedContact = contacts.find(c => c.id === selectedId);
 
   function handleSave(updatedData: ContactType) {
     const nextContacts = contacts.map(c => {
@@ -41,18 +39,15 @@ export default function ContactManager() {
         onSelect={id => setSelectedId(id)}
       />
       <hr />
-      <EditContact        
-        savedContact={selectedContact}
-        onSave={handleSave}
-      />
+      {selectedContact && (
+        <EditContact
+          key={selectedContact.id}
+          savedContact={selectedContact}
+          onSave={handleSave}
+        />
+      )}
     </div>
   )
-}
-
-export type ContactType = {
-  id: number;
-  name: string;
-  email: string;
 }
 
 const initialContacts: ContactType[] = [
