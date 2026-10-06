@@ -15,11 +15,11 @@ export default function Timer() {
     const id = setInterval(() => {
       setCount(c => c + increment);
     }, 1000);
+
     return () => {
       clearInterval(id);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [increment]);
 
   return (
     <>
