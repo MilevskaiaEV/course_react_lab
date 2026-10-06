@@ -78,4 +78,3 @@ export function fetchData(url: string): Promise<GeoObj[]> {
       }, 1000);
     });
   }
-  
